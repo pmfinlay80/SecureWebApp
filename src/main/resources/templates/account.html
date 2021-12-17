@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="static/css/style.css" th:href="@{/css/style.css}">
+
+<title>Customer Account Page</title>
+</head>
+<body>
+
+<h1 th:inline="text">Hello [[${#request.remoteUser}]]!</h1> 
+
+<!-- Supply Order Form -->
+<!-- Link to Spring Mapping -->
+<div>
+<form th:action="@{/order}" class="inset">
+<h2>Covid Supplies Order Form</h2>
+<table id="order-table">
+			<!-- Column Headings -->
+    	    <tr>
+    	         <th style="color:yellow;">Product Name</th> 
+    	         <th style="color:yellow;">Quantity</th>
+    	         <th style="color:yellow;">Unit Price</th>
+    	         <th style="text-align: right; padding-right: 30px; color:yellow;">Subtotal</th> 
+    	    </tr>
+    	    <!-- Rows of Individual Products, Quantity column input set to no value ranging from 0 to 100 -->
+            <tr class="odd">
+                <td class="product-title">Disposable Face Masks - <em>Pack 50</em></td>
+                <td class="quantity"><input type="number" class="quantity-input" id="facemasks-quantity" min="0" max="100"></input></td>
+                <td class="unit-price"><span>7.50</span></td>
+                <td class="row-total"><input type="text" class="row-total-input" id="facemasks-row-total" disabled="disabled"></input></td>
+            </tr>
+            <tr class="odd">
+                <td class="product-title">Hand Sanitiser 5L</td>
+                <td class="quantity"><input type="number" class="quantity-input" id="sanitiser5L-quantity" min="0" max="100"></input></td>
+                <td class="unit-price"><span>25.99</span></td>
+                <td class="row-total"><input type="text" class="row-total-input" id="sanitiser5L-row-total" disabled="disabled"></input></td>
+            </tr>
+            <tr class="odd">
+                <td class="product-title">Hand Sanitiser 100ml - <em>Pack 10</em></td>
+                <td class="quantity"><input type="number" class="quantity-input" id="sanitiser250ml-quantity" min="0" max="100"></input></td>
+                <td class="unit-price"><span>19.50</span></td>
+                <td class="row-total"><input type="text" class="row-total-input" id="sanitiser250ml-row-total" disabled="disabled"></input></td>
+            </tr>
+            <tr class="odd">
+                <td class="product-title">Disposable Gloves - <em>Pack 100</em></td>
+                <td class="quantity"><input type="number" class="quantity-input" id="gloves-quantity" min="0" max="100"></input></td>
+                <td class="unit-price"><span>14.50</span></td>
+                <td class="row-total"><input type="text" class="row-total-input" id="gloves-quantity-row-total" disabled="disabled"></input></td>
+            </tr>
+            <tr class="odd">
+                <td class="product-title">Covid 19 Rapid Antigen Test - <em>Pack 5</em></td>
+                <td class="quantity"><input type="number" class="quantity-input" id="test-quantity" min="0" max="100"></input></td>
+                <td class="unit-price"><span>43.99</span></td>
+                <td class="row-total"><input type="text" class="row-total-input" id="test-quantity-row-total" disabled="disabled"></input></td>
+            </tr>
+            <tr>
+                <td colspan="6" style="text-align: right;">
+                    Product SUBTOTAL: <input type="text" class="total-box" value="0" id="product-subtotal" disabled="disabled"></input>
+                </td>
+            </tr>
+            
+            <tr>
+                <td colspan="6" style="text-align: right;">
+                    VAT @ 21%: <input type="text" class="total-box" value="0" id="product-subtotal" disabled="disabled"></input>
+                </td>
+            </tr>
+    	</table>
+    
+    
+            <span>ORDER TOTAL: </span> 
+            <input type="text" class="total-box" value="0" id="order-total" disabled="disabled"></input>
+            
+            <br />
+            
+             <input type="submit" value="Submit Order" class="submit" />
+</form>
+</div>
+
+<!-- File Upload Section -->  
+<div> 
+<h1>Credit Account Application For Upload</h1>
+
+	<div>
+		<form method="POST" enctype="multipart/form-data" class="form-upload">
+			<table>
+				<tr>
+				<!-- File upload type set to accept pdf file only -->
+					<td>File to upload:</td>
+					<td><input type="file" name="file" accept=".pdf"/></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input type="submit" value="Upload" th:action="@{/credit}"/></td>
+				</tr>
+			</table>
+		</form>
+	</div>	
+
+</div>
+<!-- Logout Function -->
+<div> 
+    <input th:action="@{/logout}" type="submit" value="logout"/>
+</div>
+
+</body>
+</html>

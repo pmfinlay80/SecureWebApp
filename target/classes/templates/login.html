@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	lang="en">
+
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="static/css/style.css"
+	th:href="@{/css/style.css}">
+</head>
+<body>
+
+	<!-- Login Form -->
+	<h1>Customer Log in</h1>
+	<!-- Spring Default Error handling -->
+	<p th:if="${loginError}" class="error">Please check Login
+		Credentials</p>
+	<!-- Spring Login -->
+	<form class="form-signin" th:action="@{/login}" method="post">
+		<div th:if="${param.error}">
+			<div class="alert alert-danger">Invalid username or password.</div>
+		</div>
+
+
+		<div class="inset">
+			<p>
+				<label for="email">EMAIL ADDRESS</label> <input type="text"
+					name="email" id="email">
+			</p>
+			<p>
+				<label for="password">PASSWORD</label> <input type="password"
+					name="password" id="password">
+			</p>
+		</div>
+		<p class="p-container">
+			<input type="submit" name="go" id="go" value="Log in"> <input
+				type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+		</p>
+	</form>
+</body>
+</html>
