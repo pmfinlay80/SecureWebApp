@@ -1,5 +1,11 @@
 package com.secureapp;
 
+//Title:  Spring Boot Registration and Login with MySQL Database Tutorial
+//Author: Ha Minh, Nam
+//Date: 	 2021 
+//Code version: Java
+//Availability: https://www.codejava.net/frameworks/spring-boot/user-registration-and-login-tutorial
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -18,20 +24,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public UserDetailsService userDetailsService() {
 		return new CustomUserDetailsService();
 	}
-	
-	//Encryption function used to translate encrypted password in database to plain text password field in login form
+
+	// Encryption function used to translate encrypted password in database to plain
+	// text password field in login form
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-	
-	//Spring standard authentication provider
+
+	// Spring standard authentication provider
 	@Bean
 	public DaoAuthenticationProvider authenticationProvider() {
 		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
 		authProvider.setUserDetailsService(userDetailsService());
 		authProvider.setPasswordEncoder(passwordEncoder());
-		
+
 		return authProvider;
 	}
 
@@ -40,22 +47,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		auth.authenticationProvider(authenticationProvider());
 	}
 
-	//html pages configuration
+	// html pages configuration
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
-			.antMatchers("/account").authenticated()
-			.anyRequest().permitAll()
-			.and()
-			.formLogin()
-				.failureUrl("/login?error=true")
-				.usernameParameter("email")
-				.passwordParameter("password")
-				.defaultSuccessUrl("/account", true)
-				.permitAll()
-			.and()
-			.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login?logout");
+		http.authorizeRequests().antMatchers("/account").authenticated().anyRequest().permitAll().and().formLogin()
+				.failureUrl("/login?error=true").usernameParameter("email").passwordParameter("password")
+				.defaultSuccessUrl("/account", true).permitAll().and().logout()
+				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login?logout");
 	}
-	
-	
+
 }

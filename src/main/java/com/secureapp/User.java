@@ -1,5 +1,11 @@
 package com.secureapp;
 
+//Title:  Spring Boot Registration and Login with MySQL Database Tutorial
+//Author: Ha Minh, Nam
+//Date: 	 2021 
+//Code version: Java
+//Availability: https://www.codejava.net/frameworks/spring-boot/user-registration-and-login-tutorial
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,27 +17,27 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "customers")
 public class User {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	@Column(name = "email")
 	private String email;
-	
+
 	@Column(name = "pass")
 	private String password;
-	
+
 	@Column(name = "account_type")
 	private String type;
-	
+
 	@Column(name = "enabled")
 	private Boolean status;
-	
+
 	@Column(name = "role")
 	private String role;
 
-	//Getters & Setters for each database element
+	// Getters & Setters for each database element
 	public String getRole() {
 		return role;
 	}
@@ -79,5 +85,5 @@ public class User {
 	public void setStatus(Boolean status) {
 		this.status = status;
 	}
-	
+
 }
